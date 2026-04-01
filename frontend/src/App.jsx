@@ -34,6 +34,7 @@ import ContestDashboard from './pages/ContestDashboard'
 import ContestHost from './pages/ContestHost'
 import ContestPlay from './pages/ContestPlay'
 import ContestResults from './pages/ContestResults'
+import JobPrep from './pages/JobPrep'
 import './App.css'
 
 // Pages that render their own navbar (dashboards)
@@ -67,6 +68,7 @@ function AppLayout()
                     <Route path="/ai-interview-report/:sessionId" element={<AIInterviewReport />} />
                     <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />
                     <Route path="/coding-practice" element={<CodingPractice />} />
+                    <Route path="/job-prep" element={<JobPrep />} />
                     <Route path="/candidate-dashboard" element={<CandidateDashboard />} />
                     <Route path="/company-dashboard" element={<CompanyDashboard />} />
                     <Route path="/admin-scoring" element={<AdminScoring />} />

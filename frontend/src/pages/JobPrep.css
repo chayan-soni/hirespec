@@ -1,0 +1,568 @@
+/* Job Prep Page Styles */
+
+.job-prep-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+  color: #ffffff;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.jp-header {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 16px;
+  padding: 40px 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.jp-header-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.jp-header-content p {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+/* Search Bar */
+.jp-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  background: rgba(42, 42, 58, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 600px;
+}
+
+.jp-search-bar svg {
+  color: #a0a0a0;
+}
+
+.jp-search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.jp-search-bar input::placeholder {
+  color: #6b7280;
+}
+
+/* Companies Grid */
+.jp-companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.jp-company-card {
+  background: rgba(42, 42, 58, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.jp-company-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(42, 42, 58, 0.8);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.1);
+}
+
+.jp-card-header {
+  height: 120px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.jp-company-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.jp-company-logo-placeholder {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.jp-card-content {
+  padding: 16px;
+  flex: 1;
+}
+
+.jp-company-name-box {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 8px 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 6px;
+  border-left: 3px solid #3b82f6;
+}
+
+.jp-company-industry {
+  margin: 8px 0;
+  font-size: 13px;
+  color: #a855f7;
+  font-weight: 500;
+}
+
+.jp-company-location {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jp-card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.jp-explore-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #3b82f6;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.jp-company-card:hover .jp-explore-btn {
+  gap: 8px;
+  color: #a855f7;
+}
+
+/* Loading & Empty States */
+.jp-loading, .jp-detail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.jp-loading p, .jp-detail-loading p {
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+.jp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #6b7280;
+  grid-column: 1 / -1;
+}
+
+.jp-empty svg {
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.jp-empty h3 {
+  margin: 0 0 8px 0;
+}
+
+.jp-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* Detail View */
+.jp-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.jp-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.jp-back-btn:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Detail Header */
+.jp-detail-header {
+  background: rgba(42, 42, 58, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.jp-detail-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.jp-detail-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 8px;
+}
+
+.jp-detail-logo-placeholder {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 44px;
+}
+
+.jp-detail-name-box {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  padding: 12px 16px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+  display: inline-block;
+}
+
+.jp-detail-subtitle {
+  margin: 0;
+  color: #a855f7;
+  font-weight: 500;
+}
+
+/* Profile Section */
+.jp-profile-section {
+  background: rgba(42, 42, 58, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.jp-profile-info p {
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.jp-profile-text {
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.jp-description-text {
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+.jp-website-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.jp-website-link:hover {
+  color: #a855f7;
+}
+
+/* Questions Overview */
+.jp-questions-overview {
+  background: rgba(42, 42, 58, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.jp-questions-overview h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.jp-questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jp-question-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(59, 130, 246, 0.3);
+}
+
+.jp-question-num {
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #3b82f6;
+}
+
+.jp-question-info {
+  flex: 1;
+}
+
+.jp-question-text {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.jp-question-meta {
+  display: flex;
+  gap: 8px;
+}
+
+.jp-category, .jp-difficulty {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.jp-category.technical {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.jp-category.behavioral {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.jp-category.coding {
+  background: rgba(168, 85, 247, 0.2);
+  color: #a855f7;
+}
+
+.jp-difficulty.easy {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.jp-difficulty.medium {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.jp-difficulty.hard {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.jp-more-questions {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Action Buttons */
+.jp-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.jp-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  background: rgba(42, 42, 58, 0.6);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.jp-btn:hover {
+  transform: translateX(4px);
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.jp-btn svg {
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.jp-btn > div {
+  flex: 1;
+  text-align: left;
+}
+
+.jp-btn-title {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.jp-btn-subtitle {
+  display: block;
+  font-size: 12px;
+  color: #a0a0a0;
+  font-weight: 400;
+}
+
+.jp-btn-quiz {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.jp-btn-quiz:hover {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.jp-btn-quiz svg {
+  color: #22c55e;
+}
+
+.jp-btn-interview {
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.jp-btn-interview:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.jp-btn-interview svg {
+  color: #a855f7;
+}
+
+/* Error State */
+.jp-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #ef4444;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .jp-header-content h1 {
+    font-size: 24px;
+  }
+
+  .jp-companies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jp-detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jp-detail-header-left {
+    justify-content: center;
+  }
+
+  .jp-action-buttons {
+    gap: 12px;
+  }
+
+  .jp-btn {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  .jp-detail-name-box {
+    font-size: 20px;
+  }
+}
