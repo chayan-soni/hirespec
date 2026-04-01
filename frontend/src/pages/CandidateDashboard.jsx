@@ -215,6 +215,7 @@ function DashboardTab({user, initials, setActiveTab})
   const quickActions=[
     {label: 'My Profile', desc: 'Update resume, skills & experience', icon: <UserCheck size={22} />, tab: 'profile', badge: 'PROFILE', link: '/candidate-profile'},
     {label: 'Browse Jobs', desc: 'Find & apply to available positions', icon: <Briefcase size={22} />, tab: 'jobs', badge: 'JOBS'},
+    {label: 'Job Prep', desc: 'Company-specific interview preparation', icon: <BookOpen size={22} />, tab: 'job-prep', badge: 'PREP', link: '/job-prep'},
     {label: 'Resume Verify', desc: '3-layer resume verification system', icon: <Shield size={22} />, tab: 'verify', badge: 'VERIFY', link: '/resume-verification'},
     {label: 'Recruiter Interview', desc: 'Join live interview with recruiter', icon: <Video size={22} />, tab: 'recruiter', badge: 'LIVE'},
     {label: 'Practice Interview', desc: 'AI interviewer with instant feedback', icon: <Dumbbell size={22} />, tab: 'practice', badge: 'PRACTICE'},

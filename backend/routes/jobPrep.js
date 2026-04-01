@@ -16,7 +16,7 @@ router.get('/companies', verifyAuthOptional, async (req, res) =>
   try
   {
     const companies=await CompanyProfile.find({isActive: true})
-      .select('name logo profile industry headquarter -prepQuestions')
+      .select('name logo profile industry headquarter')
       .sort({createdAt: -1})
       .lean();
 
