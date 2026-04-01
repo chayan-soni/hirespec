@@ -855,4 +855,200 @@ router.get('/company-stats/:userId', verifyAuth, async (req, res) =>
   }
 });
 
+// SEED JOBS - Create sample jobs for testing
+router.post('/seed-jobs', async (req, res) =>
+{
+  try
+  {
+    // First, check if any jobs already exist
+    const existingJobs=await Job.findOne();
+    if (existingJobs) {
+      return APIResponse.success(res, {message: 'Jobs already seeded'}, 'Jobs data exists');
+    }
+
+    // Get or create demo company user
+    let demoCompanyUser=await User.findOne({username: 'demo_company', role: 'company_admin'});
+    if (!demoCompanyUser) {
+      demoCompanyUser=await User.create({
+        username: 'demo_company',
+        email: 'demo_company@hirespec.com',
+        password: 'demo123',
+        role: 'company_admin',
+        companyName: 'Google',
+        fullName: 'Demo Company Admin',
+        phone: '+919999999999',
+      });
+    }
+
+    const sampleJobs=[
+      {
+        title: 'Senior Software Engineer',
+        department: 'Engineering',
+        location: 'On-site',
+        type: 'Full-Time',
+        description: 'Join as a Senior Software Engineer to build scalable systems that impact billions of users. We\'re looking for experienced engineers passionate about solving complex problems.',
+        requirements: '5+ years of experience in software development, strong C++ or Java skills, experience with distributed systems',
+        skills: ['C++', 'Java', 'Python', 'System Design', 'Distributed Systems'],
+        salary: {min: 180000, max: 250000, currency: 'USD'},
+        companyName: 'Google',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 7.0, minExperience: 5, requiredSkills: ['C++', 'System Design'], autoShortlist: true, minATSScore: 65},
+        applicantCount: 0,
+      },
+      {
+        title: 'Data Scientist',
+        department: 'AI & ML',
+        location: 'On-site',
+        type: 'Full-Time',
+        description: 'Build machine learning models and data pipelines for Amazon\'s e-commerce platform. Work with large-scale data and modern ML tools.',
+        requirements: '3+ years in data science, proficiency in Python and SQL, experience with ML frameworks like TensorFlow or PyTorch',
+        skills: ['Python', 'SQL', 'Machine Learning', 'TensorFlow', 'Statistics'],
+        salary: {min: 150000, max: 220000, currency: 'USD'},
+        companyName: 'Amazon',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 6.5, minExperience: 3, requiredSkills: ['Python', 'Machine Learning'], autoShortlist: true, minATSScore: 60},
+        applicantCount: 0,
+      },
+      {
+        title: 'Cloud Solutions Architect',
+        department: 'Cloud',
+        location: 'Hybrid',
+        type: 'Full-Time',
+        description: 'Design cloud solutions for enterprises using Microsoft Azure. Lead technical discussions and mentor junior architects.',
+        requirements: '7+ years in cloud technologies, Azure certification, strong architecture and design skills',
+        skills: ['Azure', 'Cloud Architecture', 'C#', '.NET', 'Solutions Design'],
+        salary: {min: 200000, max: 280000, currency: 'USD'},
+        companyName: 'Microsoft',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 7.5, minExperience: 7, requiredSkills: ['Azure', 'Cloud Architecture'], autoShortlist: true, minATSScore: 70},
+        applicantCount: 0,
+      },
+      {
+        title: 'Product Manager',
+        department: 'Product',
+        location: 'On-site',
+        type: 'Full-Time',
+        description: 'Lead product strategy for Meta\'s next-generation social platforms. Drive product vision and work cross-functionally with engineering and design.',
+        requirements: '5+ years of product management experience, strong analytical skills, background in social or consumer tech',
+        skills: ['Product Strategy', 'Analytics', 'Communication', 'Leadership', 'Data Analysis'],
+        salary: {min: 170000, max: 240000, currency: 'USD'},
+        companyName: 'Meta',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 7.0, minExperience: 5, requiredSkills: ['Product Strategy', 'Analytics'], autoShortlist: true, minATSScore: 65},
+        applicantCount: 0,
+      },
+      {
+        title: 'Hardware Design Engineer',
+        department: 'Hardware Engineering',
+        location: 'On-site',
+        type: 'Full-Time',
+        description: 'Design next-generation Apple devices. Work on cutting-edge hardware design with the world\'s best engineers.',
+        requirements: '6+ years in hardware design, expertise in circuit design and testing, knowledge of modern semiconductors',
+        skills: ['Circuit Design', 'VHDL', 'Hardware Testing', 'Signal Processing', 'Semiconductors'],
+        salary: {min: 190000, max: 260000, currency: 'USD'},
+        companyName: 'Apple',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 7.5, minExperience: 6, requiredSkills: ['Circuit Design', 'VHDL'], autoShortlist: true, minATSScore: 68},
+        applicantCount: 0,
+      },
+      {
+        title: 'Embedded Systems Engineer',
+        department: 'Engineering',
+        location: 'On-site',
+        type: 'Full-Time',
+        description: 'Build firmware and control systems for Tesla\'s electric vehicles. Work on safety-critical systems and autonomous driving.',
+        requirements: '5+ years in embedded systems, proficiency in C/C++, experience with real-time operating systems',
+        skills: ['Embedded C', 'C++', 'RTOS', 'Firmware Development', 'Automotive Electronics'],
+        salary: {min: 160000, max: 230000, currency: 'USD'},
+        companyName: 'Tesla',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 7.0, minExperience: 5, requiredSkills: ['Embedded C', 'RTOS'], autoShortlist: true, minATSScore: 65},
+        applicantCount: 0,
+      },
+      {
+        title: 'Backend Engineer',
+        department: 'Engineering',
+        location: 'Hybrid',
+        type: 'Full-Time',
+        description: 'Build scalable services for Netflix\'s streaming platform. Handle billions of requests daily with high reliability.',
+        requirements: '4+ years of backend development, expertise in Java or Go, experience with microservices',
+        skills: ['Java', 'Go', 'Microservices', 'Kafka', 'PostgreSQL'],
+        salary: {min: 155000, max: 225000, currency: 'USD'},
+        companyName: 'Netflix',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 6.8, minExperience: 4, requiredSkills: ['Java', 'Microservices'], autoShortlist: true, minATSScore: 62},
+        applicantCount: 0,
+      },
+      {
+        title: 'Full Stack Developer',
+        department: 'Engineering',
+        location: 'Hybrid',
+        type: 'Full-Time',
+        description: 'Develop professional networking features for LinkedIn. Work with millions of professionals worldwide.',
+        requirements: '3+ years in full-stack development, proficiency in React and Node.js, experience with social networks',
+        skills: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'REST APIs'],
+        salary: {min: 140000, max: 200000, currency: 'USD'},
+        companyName: 'LinkedIn',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 6.5, minExperience: 3, requiredSkills: ['React', 'Node.js'], autoShortlist: true, minATSScore: 60},
+        applicantCount: 0,
+      },
+      {
+        title: 'QA Automation Engineer',
+        department: 'Quality Assurance',
+        location: 'Remote',
+        type: 'Full-Time',
+        description: 'Build automated testing frameworks for Google\'s products. Ensure quality at scale with advanced testing strategies.',
+        requirements: '3+ years in QA automation, expertise in Selenium or Cypress, strong understanding of testing principles',
+        skills: ['Selenium', 'Python', 'JavaScript', 'Test Automation', 'CI/CD'],
+        salary: {min: 120000, max: 170000, currency: 'USD'},
+        companyName: 'Google',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 6.5, minExperience: 3, requiredSkills: ['Selenium', 'Test Automation'], autoShortlist: true, minATSScore: 60},
+        applicantCount: 0,
+      },
+      {
+        title: 'Frontend Engineer',
+        department: 'Engineering',
+        location: 'Remote',
+        type: 'Full-Time',
+        description: 'Build beautiful and responsive web applications for Amazon AWS console. Millions of developers use your code daily.',
+        requirements: '4+ years in frontend development, expert-level JavaScript, experience with React or Vue',
+        skills: ['React', 'TypeScript', 'CSS', 'JavaScript', 'Redux'],
+        salary: {min: 145000, max: 210000, currency: 'USD'},
+        companyName: 'Amazon',
+        status: 'active',
+        eligibilityCriteria: {minCGPA: 6.8, minExperience: 4, requiredSkills: ['React', 'JavaScript'], autoShortlist: true, minATSScore: 62},
+        applicantCount: 0,
+      },
+    ];
+
+    // Add postedBy field to all jobs
+    const jobsWithUser=sampleJobs.map(job => ({
+      ...job,
+      postedBy: demoCompanyUser._id,
+    }));
+
+    // Insert all jobs
+    const createdJobs=await Job.insertMany(jobsWithUser);
+
+    console.log(`[JOBS] ✅ Seeded ${createdJobs.length} sample jobs successfully`);
+
+    return APIResponse.success(res, {
+      message: `${createdJobs.length} jobs seeded successfully`,
+      jobs: createdJobs.map(j => ({
+        id: j._id,
+        title: j.title,
+        company: j.companyName,
+        department: j.department,
+        location: j.location,
+      })),
+    }, 'Jobs seeded');
+  } catch (err)
+  {
+    console.error('[JOBS] Seed error:', err);
+    return APIResponse.error(res, `Failed to seed jobs: ${err.message}`, 500);
+  }
+});
+
 export default router;
