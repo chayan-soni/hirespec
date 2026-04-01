@@ -22,10 +22,11 @@ function generateToken(userId)
 function setTokenCookie(res, token)
 {
   // Set HTTP-only cookie (cannot be accessed by JavaScript)
+  const isProduction=process.env.NODE_ENV==='production';
   res.cookie('authToken', token, {
     httpOnly: true,         // Prevent JS access (XSS protection)
-    secure: process.env.NODE_ENV==='production',  // Only send over HTTPS in production
-    sameSite: 'None',     // CSRF protection
+    secure: isProduction,   // Only send over HTTPS in production
+    sameSite: isProduction? 'None':'Lax',  // 'None' requires secure:true, use 'Lax' for dev
     path: '/',
     maxAge: 7*24*60*60*1000, // 7 days
   });

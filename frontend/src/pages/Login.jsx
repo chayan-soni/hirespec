@@ -133,14 +133,28 @@ function Login()
     setLoading(true);
     try
     {
+      console.log(`[DEMO-LOGIN] Attempting login with: ${demoUsername}`);
       const res=await api.post('/auth/login', {username: demoUsername, password: 'demo123'});
-      console.log('[DEMO-LOGIN] Success:', res.data);
+      console.log('[DEMO-LOGIN] Response:', res.data);
+      
       const userData=res.data.data?.user||res.data.data||res.data;
+      console.log('[DEMO-LOGIN] Extracted user data:', userData);
+      
+      if (!userData.role)
+      {
+        console.error('[DEMO-LOGIN] User data missing role field!', userData);
+        setError('Login failed: Missing user role');
+        setLoading(false);
+        return;
+      }
+      
       authService.setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
+      console.log('[DEMO-LOGIN] Stored user in localStorage, navigating to:', getDashboardPath(userData.role));
       navigate(getDashboardPath(userData.role));
     } catch (err)
     {
+      console.error('[DEMO-LOGIN] Error:', err);
       setError(err.response?.data?.message||'Demo login failed');
     } finally
     {

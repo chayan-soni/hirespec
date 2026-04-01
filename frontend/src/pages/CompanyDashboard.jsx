@@ -387,14 +387,26 @@ function CompanyDashboard()
       if (stored)
       {
         const u=JSON.parse(stored);
+        console.log('[CompanyDashboard] User loaded from localStorage:', u);
+        
+        // Role validation
+        if (!['company_admin', 'company_hr', 'recruiter'].includes(u.role))
+        {
+          console.warn('[CompanyDashboard] Invalid role for company dashboard:', u.role);
+          navigate('/login');
+          return;
+        }
+        
         setUser(u);
         fetchCompanyData(u.id);
       } else
       {
+        console.log('[CompanyDashboard] No user in localStorage, redirecting to login');
         navigate('/login');
       }
-    } catch
+    } catch (err)
     {
+      console.error('[CompanyDashboard] Error loading user:', err);
       navigate('/login');
     }
   }, [navigate]);

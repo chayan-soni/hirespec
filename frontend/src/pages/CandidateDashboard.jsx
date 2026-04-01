@@ -47,13 +47,26 @@ function CandidateDashboard()
       const stored=localStorage.getItem('user');
       if (stored)
       {
-        setUser(JSON.parse(stored));
+        const u=JSON.parse(stored);
+        console.log('[CandidateDashboard] User loaded from localStorage:', u);
+        
+        // Role validation
+        if (u.role !== 'candidate')
+        {
+          console.warn('[CandidateDashboard] Invalid role for candidate dashboard:', u.role);
+          navigate('/login');
+          return;
+        }
+        
+        setUser(u);
       } else
       {
+        console.log('[CandidateDashboard] No user in localStorage, redirecting to login');
         navigate('/login');
       }
-    } catch
+    } catch (err)
     {
+      console.error('[CandidateDashboard] Error loading user:', err);
       navigate('/login');
     }
   }, [navigate]);
